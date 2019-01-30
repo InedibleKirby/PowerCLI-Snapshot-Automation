@@ -22,7 +22,7 @@ $check = get-vm $vms | get-snapshot |
 		},Created,Name		#Lists snapshots, has an expression to find snapshot age, displays VM, date of creation, and has expression to find size in GB.
 
 $info1 = $check | Select Age,VM,SizeGB,Created,Name | Sort-Object -Property VM | ConvertTo-Html -Fragment		#Gathers snapshot Ages, assiciated VMs, Size, Creation date, and name, then converts to HTML. Sorts by VM property.
-$info2 = $check | Measure-Object -Sum SizeGB | select Sum | ConvertTo-Html -Fragment		#This section adds total of all WEB151 snapshots, then converts to HTML.
+$info2 = $check | Measure-Object -Sum SizeGB | select Sum | ConvertTo-Html -Fragment		#This section adds total of all snapshots, then converts to HTML.
 
 $info3 = get-vm $vms | select Name,@{
 	Label="Number Of Snapshots";Expression={(Get-Snapshot -VM $_ | Measure-Object).Count}
@@ -46,7 +46,7 @@ get-vm $vms | get-snapshot | Where { $_.Name -NotLike "MASTER" -and $_.Created -
 
 
 
-#–Whatif - check tool, delete for actual task completion
+#â€“Whatif - check tool, delete for actual task completion
 #Simply remove the # sign in front of the -Whatif found in the script for testing without creation or deletion of snapshots.
 
 Stop-Transcript
