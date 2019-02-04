@@ -27,7 +27,7 @@ $info2 = $check | Measure-Object -Sum SizeGB | select Sum | ConvertTo-Html -Frag
 $info3 = get-vm $vms | select Name,@{
 	Label="Number Of Snapshots";Expression={(Get-Snapshot -VM $_ | Measure-Object).Count}
 	},@{
-	Label="Total Snapshot Size in MB";Expression={("{0:N1}" -f (Get-Snapshot -VM $_ | Measure-Object -Sum SizeMB).Sum)}
+	Label="Total Snapshot Size in MB";Expression={("{0:N0}" -f (Get-Snapshot -VM $_ | Measure-Object -Sum SizeMB).Sum)}
 	} | Sort-Object -Property Name |  ConvertTo-Html -Fragment		#Lists VMs and how many snapshots each has and how much space each VM's snapshots take in total. Sorts by Name property.
 
 
